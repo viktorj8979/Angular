@@ -1,0 +1,146 @@
+<!DOCTYPE HTML>
+<html xmlns:ng="http://angularjs.org">
+<head>
+<meta charset="utf-8">
+<script src="angular.js" ng:autobind></script>
+
+<script>
+Registrations.$inject = ['$xhr']; 
+
+function Registrations(xhr){ 
+	this.xhr = xhr; 
+	var self = this;
+	this.xhr("JSON"
+		, "/data/drzb2011/Registration?callback=JSON_CALLBACK"
+		, function(code, response){ 
+//			console.log('xhr JSON', code, response);
+			self.data = response;
+		}
+	); 
+
+} 
+
+angular.filter('lf2p', function(input) {
+	if ( input && input.length )
+		return input.replace(/\n/g,"<p>");
+});
+
+</script>
+
+<title>DRZB2011 Registrations</title>
+
+<style>
+.address {
+}
+.abstract {
+	font-style: italic;
+	font-size: 90%;
+	color: #3f3f3f;
+}
+
+li {
+	margin-top: 40px;
+}
+
+.participant {
+	background-color: #ffcccc;
+	font-weight: bold;
+}
+.sparticipant {
+	background-color: #ccffe6;
+	font-weight: bold;
+
+}
+.symposium {
+	background-color: #ccccff;
+	font-weight: bold;
+
+}
+.round {
+	background-color: #e6ccff;
+	background-color:  #99ffcc;
+	font-weight: bold;
+
+}
+.lecture {
+	background-color: #ffccff;
+	font-weight: bold;
+
+}
+.poster {
+	background-color: #ffcce6;
+	background-color: #ffcc99;
+	font-weight: bold;
+
+}
+.student {
+	background-color: #ffff99;
+	font-weight: bold;
+
+}
+.accomp {
+	background-color: #ccff99;
+	font-weight: bold;
+
+}
+
+</style>
+
+</head>
+<body>
+
+<div ng:controller="Registrations"> 
+
+Odabir: <br/>
+
+<label class="symposium"><input name="selection" type="radio" value="symposium">Rad unutar simpozija<br></label>
+<label class="lecture"><input name="selection" type="radio" value="lecture">Usmeno priopćenje <br></label>
+<label class="poster"><input name="selection" type="radio" value="poster">Poster <br></label>
+
+
+<div>
+<div ng:repeat="registration in data" ng:show="registration.type == selection || selection == 'all'">
+<!--
+<span class="{{registration.type}}">
+	<span ng:show="registration.type == 'participant'">samo registracija</span> 
+	<span ng:show="registration.type == 'sparticipant'">sudionik simpozija/okruglog stola</span> 
+	<span ng:show="registration.type == 'symposium'">organizator simpozija</span> 
+	<span ng:show="registration.type == 'round'">organizator okruglog stola</span> 
+	<span ng:show="registration.type == 'lecture'">usmeno priopćenje</span> 
+	<span ng:show="registration.type == 'poster'">poster</span> 
+	<span ng:show="registration.type == 'student'">student - samo registracija</span> 
+	<span ng:show="registration.type == 'accomp'">osoba u pratnji</span> 
+</span>
+	<span ng:show="registration.student == thrue"> - student</span><br>
+-->
+
+	<span ng:repeat="author in registration.work.authors" ng:show="registration.work.title">
+		<span style="font-size: 12pt; font-weight: bold; margin: 0; padding-top: 46pt; display: inline;">{{author.name}} {{author.surname}}</span>, 
+		<span style="font-size: 12pt; font-style: italic; font-weight: normal; margin: 0; display: inline;">{{author.inst}}</span>,</span>
+	<h1 style="font-size: 14pt; text-align: center; padding-bottom: 14pt">{{registration.work.title}}</h1>
+<!--
+	<div>{{registration.work.abstract | lf2p | html}}</div>
+-->
+	<div>{{registration.work.abstract}}</div>
+	<div>{{symposium.abstract}}</div>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+<!--
+	<div>{{registration._id}}</div>
+-->
+</div>
+</div>
+
+<div>
+<input name=debug type=checkbox style="float: right;">
+<pre ng:show="debug">
+data={{data}}
+</pre>
+</div>
+
+</div>
+
+
+</body>
+</html>

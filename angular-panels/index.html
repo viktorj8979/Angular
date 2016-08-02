@@ -1,0 +1,98 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+	<title>AngularJS Panels</title>
+	<meta name="description" content="Angular widget for easy creation of portal-like floating panels">
+	<meta name="author" content="Piotr Kukielka">
+
+	<meta name="viewport" content="width=device-width">
+
+	<link rel="stylesheet" href="app/css/bootstrap.css">
+	<style>
+	body {
+	  padding-top: 60px;
+	  padding-bottom: 40px;
+	}
+	</style>
+	<link rel="stylesheet" href="app/css/bootstrap-responsive.css">
+	<link rel="stylesheet" href="app/css/style.css">
+
+	<script src="app/lib/modernizr-2.5.3-respond-1.1.0.min.js"></script>
+</head>
+<body class="bg-gradient" data-spy="scroll" data-target="#navbarMain" data-offset="40">
+  <!-- =================== Navigation bar =================== -->
+  <div id="navbarMain" class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container">
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </a>
+        <a class="brand" href="https://github.com/pkukielka/angular-panels">
+          AngularJS Panels
+          <i class="icon-th-large icon-white"></i>
+        </a>
+        <div class="nav-collapse">
+          <ul class="nav">
+            <li class="active"><a href="#demo">Demo</a></li>
+            <li><a class="" href="#documentation">Documentation</a></li>
+            <li><a class="" href="#acknowledgments">Acknowledgments</a></li>
+            <li><a class="" href="#contact">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== Demo section ==================== -->
+  <div ng:app ng:controller="PanelsController" class="container" id="demo">
+    <div class="page-header">
+      <h1>Demo<small> Try if you like it</small></h1>
+    </div>
+
+    <div class="alert alert-info">
+      Move panels around and try to edit JSON model to check
+      if all changes are properly propagated in both directions.
+    </div>
+    <div class="row">
+      <div class="span6">
+        <div class="well">
+          <div class="controls">
+            <textarea ng:model="currentModelJson" class="input-xxlarge" rows="25">
+            </textarea>
+          </div>
+        </div>
+      </div>
+      <div class="span6">
+        <div ui:panels model="currentModel">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =============== Documentation section =============== -->
+  <div class="container" id="documentation">
+    <div class="page-header">
+      <h1>Documentation</h1>
+    </div>
+  </div>
+
+<script src="app/lib/jquery-1.7.1.min.js"></script>
+<script src="app/lib/jquery-ui-1.8.18.min.js"></script>
+<script src="app/lib/bootstrap/transition.js"></script>
+<script src="app/lib/bootstrap/collapse.js"></script>
+<script src="app/lib/bootstrap/scrollspy.js"></script>
+<script src="app/lib/angular/angular-0.10.6.js" ng:autobind></script>
+<script src="app/js/controllers.js"></script>
+<script src="app/js/widgets.js"></script>
+<script>$('#navbarMain').scrollspy()</script>
+
+</body>
+</html>

@@ -1,0 +1,22 @@
+cs-unitfield {
+  $unitFieldTypeWidth: rem(50);
+  font-size: 0;
+  position: relative;
+  white-space: nowrap;
+  width: 100%;
+
+  input[type="text"] {
+    padding: 0 rem(10);
+    width: 100%;
+    padding-right: $unitFieldTypeWidth;
+  }
+
+  select {
+    background-color: $input-background-color;
+    border-radius: 0;
+    padding: 0;
+    position: absolute;
+    right: 0;
+    width: $unitFieldTypeWidth;
+  }
+}

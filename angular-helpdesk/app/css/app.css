@@ -1,0 +1,225 @@
+body {
+  margin: 0;
+  font: normal 13px arial,sans-serif;
+}
+
+h1 {
+  color: #DD4B39;
+  text-shadow: #333 1.5px 1.5px 1.5px;
+}
+
+h1 a {
+  color: #DD4B39;
+  text-decoration: none;
+}
+
+h1 a:hover {
+  color: #36C;
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+a {
+  color: #36C;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.w-960 {
+  width: 960px;
+  margin: 0 auto;
+}
+
+.right {
+  float: right;
+}
+
+.wrapper {
+  width: 100%;
+  clear: both;
+}
+
+
+/* MAIN LAYOUT */
+
+#g-toolbar {
+  height: 16px;
+  padding: 7px 5px;
+  background-color: #2D2D2D;
+  color: #CCC;
+  border-bottom: 1px solid #000;
+}
+
+#g-toolbar a {
+  color: #CCC;
+}
+
+#fixed-toolbar {
+  position: fixed;
+  top: 4px;
+  width: 100%;
+}
+
+.app-status {
+  margin: 0 auto;
+  width: 300px;
+  height: 17px;
+  padding: 2px 6px;
+  font-weight: bold;
+  font-size: 15px;
+  color: black;
+  text-align: center;
+
+  background: #c6cf43;
+  background: -moz-linear-gradient(top, #d1d14b, #bdb638);
+  background: -o-linear-gradient(top, #d1d14b, #bdb638);
+  background: -webkit-gradient(linear, left top, left bottom, from(#d1d14b), to(#bdb638));
+  border: 1px solid #b09927;
+
+  border-radius: 6px;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+}
+
+#header {
+  height: 60px;
+  background-color: #F1F1F1;
+  border-top: 1px solid #D2D2D2;
+  border-bottom: 1px solid #D2D2D2;
+}
+
+#menu {
+  display: inline-block;
+  width: 200px;
+  color: #333;
+}
+
+#menu ul li a {
+  display: block;
+  color: #333;
+  padding: 6px 14px;
+}
+
+#menu ul li a:hover {
+  background-color: #F1F1F1;
+  text-decoration: none;
+}
+
+#menu ul li a.active:hover {
+  background-color: #FFF;
+}
+
+#menu ul li a.active {
+  color: #DD4B39;
+  font-weight: bold;
+}
+
+#content {
+  display: inline-block;
+  padding: 10px;
+  vertical-align: top;
+  min-height: 600px;
+  width: 740px;
+  border-left: 1px solid #E3E3E3;
+  margin-left: -1px;
+}
+
+#footer {
+  padding: 10px 0;
+  color: #666;
+  text-align: center;
+  font-size: 11px;
+  border-top: 1px solid #E3E3E3;
+}
+
+
+/* PROJECTS */
+
+.project.new-form input {
+  width: 693px;
+  margin-bottom: 5px;
+}
+
+
+/* TICKETS */
+
+.ticket-number, .ticket-author, .ticket-assignee, .ticket-created {
+  font-weight: bold;
+}
+
+.ticket-description {
+  font-style: italic;
+}
+
+.ticket-state {
+  border: 1px solid #333;
+  border-radius: 6px;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  padding: 2px 6px;
+  font-weight: bold;
+  font-size: 12px;
+  margin-left: -6px;
+}
+
+.ticket-state.new {
+  background: #67AE3F;
+  background: -moz-linear-gradient(top, #77BB4E, #57A02F);
+  background: -o-linear-gradient(top, #77BB4E, #57A02F);
+  background: -webkit-gradient(linear, left top, left bottom, from(#77BB4E), to(#57A02F));
+  border: 1px solid #3F980E;
+}
+
+.ticket-state.assigned {
+  background: #4D90FE;
+  background: -webkit-gradient(linear, left top, left bottom, from(#4D90FE), to(#4787ED));
+  background: -moz-linear-gradient(top, #4D90FE, #4787ED);
+  background: -o-linear-gradient(top, #4D90FE, #4787ED);
+  border: solid 1px #3079ED;
+}
+
+.ticket-revision.new-form input {
+  width: 518px; 
+}
+
+.ticket-revision.new-form button {
+  width: 140px;
+}
+
+.ticket-revision.new-form select {
+  width: 200px; 
+}
+
+.ticket-actions {
+  float: right;
+  margin-top: 5px;
+}
+
+
+/* PROJECTS, TICKETS shared */
+
+.new-form textarea {
+  float: left;
+  width: 594px;
+  height: 48px;
+}
+
+.project.new-form button, .ticket.new-form button {
+  margin-left: 10px;
+  width: 130px;
+  height: 54px;
+}
+
+ul.list li {
+  border-bottom: 1px solid #E3E3E3;
+  margin-bottom: 5px;
+  padding: 5px;
+}

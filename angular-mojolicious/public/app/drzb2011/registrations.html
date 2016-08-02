@@ -1,0 +1,144 @@
+<!DOCTYPE HTML>
+<html xmlns:ng="http://angularjs.org">
+<head>
+<meta charset="utf-8">
+<script src="angular.js" ng:autobind></script>
+
+<script>
+Registrations.$inject = ['$xhr']; 
+
+function Registrations(xhr){ 
+	this.xhr = xhr; 
+	var self = this;
+	this.xhr("JSON"
+		, "/data/drzb2011/Registration?callback=JSON_CALLBACK"
+		, function(code, response){ 
+//			console.log('xhr JSON', code, response);
+			self.data = response;
+		}
+	); 
+
+} 
+
+</script>
+
+<title>DRZB2011 Registrations</title>
+
+<style>
+.address {
+}
+.abstract {
+	font-style: italic;
+	font-size: 90%;
+	color: #3f3f3f;
+}
+
+li {
+	margin-top: 40px;
+}
+
+.participant {
+	background-color: #ffcccc;
+	font-weight: bold;
+}
+.sparticipant {
+	background-color: #ccffe6;
+	font-weight: bold;
+
+}
+.symposium {
+	background-color: #ccccff;
+	font-weight: bold;
+
+}
+.round {
+	background-color: #e6ccff;
+	background-color:  #99ffcc;
+	font-weight: bold;
+
+}
+.lecture {
+	background-color: #ffccff;
+	font-weight: bold;
+
+}
+.poster {
+	background-color: #ffcce6;
+	background-color: #ffcc99;
+	font-weight: bold;
+
+}
+.student {
+	background-color: #ffff99;
+	font-weight: bold;
+
+}
+.accomp {
+	background-color: #ccff99;
+	font-weight: bold;
+
+}
+
+</style>
+
+</head>
+<body>
+
+<div ng:controller="Registrations"> 
+
+Odabir: <br/>
+
+<label><input name="selection" type="radio" value="all">SVI <br></label>
+<label class="participant"><input name="selection" type="radio" value="participant">Samo registracija <br></label>
+<label class="sparticipant"><input name="selection" type="radio" value="sparticipant">Sudionik simpozija/okruglog stola <br></label>
+<label class="symposium"><input name="selection" type="radio" value="symposium">Organizator simpozija <br></label>
+<label class="round"><input name="selection" type="radio" value="round">Organizator okruglog stola<br></label>
+<label class="lecture"><input name="selection" type="radio" value="lecture">Usmeno priopćenje <br></label>
+<label class="poster"><input name="selection" type="radio" value="poster">Poster <br></label>
+<label class="student"><input name="selection" type="radio" value="student">Student - samo registracija<br></label>
+<label class="accomp"><input name="selection" type="radio" value="accomp">Osoba u pratnji<br></label>
+
+
+<ol>
+<li ng:repeat="registration in data" ng:show="registration.type == selection || selection == 'all'">
+<span class="{{registration.type}}">
+	<span ng:show="registration.type == 'participant'">samo registracija</span> 
+	<span ng:show="registration.type == 'sparticipant'">sudionik simpozija/okruglog stola</span> 
+	<span ng:show="registration.type == 'symposium'">organizator simpozija</span> 
+	<span ng:show="registration.type == 'round'">organizator okruglog stola</span> 
+	<span ng:show="registration.type == 'lecture'">usmeno priopćenje</span> 
+	<span ng:show="registration.type == 'poster'">poster</span> 
+	<span ng:show="registration.type == 'student'">student - samo registracija</span> 
+	<span ng:show="registration.type == 'accomp'">osoba u pratnji</span> 
+</span>
+	<span ng:show="registration.student == thrue"> - student</span><br>
+{{registration.person.name}}
+{{registration.person.surname}}
+&lt;{{registration.person.email}}&gt; {{registration.person.inst}}, {{registration.person.city}}, {{registration.person.country}}
+<div>{{registration.symposium.title}}<br>{{registration.symposium.abstract}}</div>
+<div><b>{{registration.work.title}}</b></div>
+<span ng:repeat="author in registration.work.authors" ng:show="registration.work.title">
+{{author.name}}
+{{author.surname}},
+{{author.inst}} <br>
+</span>
+<div class="abstract">{{registration.work.abstract}}</div>
+<div>{{registration._id}}</div>
+<!--
+<div class=address>{{registration.person.zip}} {{registration.person.city}}</div>
+-->
+</li>
+</ol>
+
+<div>
+<input name=debug type=checkbox style="float: right;">
+<pre ng:show="debug">
+data={{data}}
+</pre>
+</div>
+
+</div>
+
+
+</body>
+</html>

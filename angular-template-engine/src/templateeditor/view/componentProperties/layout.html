@@ -1,0 +1,38 @@
+﻿<div class="two columns">
+  <label ng-bind="localization.componentProperties[isTransposedHorizontal ? 'right' : 'left']" ng-click="transpose('isTransposedHorizontal', 'left', 'right')"></label>
+  <cs-unitfield model="visualProperties[isTransposedHorizontal ? 'right' : 'left' ]"></cs-unitfield>
+
+  <label ng-bind="localization.componentProperties[isTransposedVertical ? 'bottom' : 'top']" ng-click="transpose('isTransposedVertical', 'top', 'bottom')"></label>
+  <cs-unitfield model="visualProperties[isTransposedVertical ? 'bottom' : 'top' ]"></cs-unitfield>
+</div>
+
+<div class="three columns">
+  <label ng-bind="::localization.componentProperties.width"></label>
+  <cs-unitfield model="visualProperties.width"></cs-unitfield>
+
+  <label ng-bind="::localization.componentProperties.min"></label>
+  <cs-unitfield model="visualProperties.minWidth"></cs-unitfield>
+
+  <label ng-bind="::localization.componentProperties.max"></label>
+  <cs-unitfield model="visualProperties.maxWidth"></cs-unitfield>
+</div>
+
+<div class="three columns">
+  <label ng-bind="::localization.componentProperties.height"></label>
+  <cs-unitfield model="visualProperties.height"></cs-unitfield>
+
+  <label ng-bind="::localization.componentProperties.min"></label>
+  <cs-unitfield model="visualProperties.minHeight"></cs-unitfield>
+
+  <label ng-bind="::localization.componentProperties.max"></label>
+  <cs-unitfield model="visualProperties.maxHeight"></cs-unitfield>
+</div>
+
+<!--TODO: Localize-->
+<div class="columns">
+  <label>Content Overflow</label>
+  <select ng-model="visualProperties.overflow">
+    <option value="">Grow</option>
+    <option value="auto">Show scrollbars</option>
+  </select>
+</div>

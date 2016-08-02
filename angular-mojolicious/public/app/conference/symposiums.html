@@ -1,0 +1,34 @@
+<!DOCTYPE HTML>
+<html xmlns:ng="http://angularjs.org">
+<head>
+<meta charset="utf-8">
+<script src="angular.js" ng:autobind></script>
+
+<script type="text/javascript" src="database.js"></script> 
+<script type="text/javascript" src="symposiums.js"></script> 
+
+<title>Conference registration</title>
+
+</head>
+<body>
+
+<div ng:controller="Symposiums"> 
+
+<h1>Submitted symposiums</h1>
+
+<div ng:repeat="s in data.response.rows">
+<h2 ng:show="s.key[1] == 1">{{s.key[0]}}</h2>
+{{s.key[1]}}. {{s.value}}
+</div>
+
+<input name=debug type=checkbox>
+<pre ng:show="debug">
+data={{data}}
+</pre>
+
+</div> 
+
+<a href="registration.html">registration</a>
+
+</body>
+</html>

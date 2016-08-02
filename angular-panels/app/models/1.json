@@ -1,0 +1,40 @@
+{
+	"name": "Top 9 Most Absurd Programming Languages",
+	"layout" :
+	[
+		[
+			{ 
+				"header": "Lolcode", 
+				"content": "Lolcode was inspired by the language expressed in examples of the lolcat Internet meme. The language was created in 2007 by Adam Lindsay, researcher at the Computing Department of Lancaster University." 
+			},
+			{  
+				"header": "Befunge",
+				"content": "Befunge and its ilk allow the instruction pointer to roam in multiple dimensions through the code. For example the following program displays “Hello World” by pushing the characters in reverse order onto the stack, then printing the characters in a loop which circulates clockwise through the instructions [>], [:], [v], [_], [,], and [^]." 
+			}
+		], 
+		[
+			{ 
+				"header": "Chef",
+				"content": "Chef is designed to make programs look like cooking recipes. e.g. the following statement pushes an item onto a stack." 
+			},
+			{  
+				"header": "Piet",
+				"content": "Piet is a visual language whose programs are bitmaps that resemble abstract art.</br></br>Hello World example: <img class='alignnone size-full wp-image-19827' title='Piet_hello_big' src='http://www.topdesignmag.com/wp-content/uploads/2011/04/Piet_hello_big.png' width='150' height='145'>"
+			}
+		], 
+		[
+			{ 
+				"header": "Whitespace",
+				"content": "Whitespace only considers the layout of whitespace and ignores all non-whitespace characters. <img class='alignnone size-full wp-image-19831' title='whitesp' src='http://www.topdesignmag.com/wp-content/uploads/2011/04/whitesp.png' width='384' height='224'>" 
+			},
+			{  
+				"header": "Brainfuck",
+				"content": "Brainfuck is designed for extreme minimalism and leads to obfuscated code, with programs containing only 8 distinct characters." 
+			},
+			{  
+				"header": "Ook!",
+				"content": "Ook! is similar to Brainfuck, but uses the words “Ook!“, “Ook.” and “Ook?” instead." 
+			}
+		]
+	]
+}

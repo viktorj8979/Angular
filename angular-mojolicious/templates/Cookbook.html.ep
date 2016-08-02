@@ -1,0 +1,30 @@
+<html>
+ <head>
+  <title>&lt;angular/&gt; CookBook examples</title>
+ </head>
+<body>
+
+<h1>&lt;angular/&gt; CookBook examples</h1>
+
+<div>
+Examples from
+<a href="http://angularjs.org/">&lt;angular/&gt</a>
+<a href="http://angularjs.org/Cookbook">Cookbook</a>
+
+<ul>
+
+% foreach my $path ( sort glob('templates/Cookbook/*') ) {
+%	my ( $file, $name ) = ( $1.$2.$3, $2 ) if $path =~ m{^.+/(\d-)([^/]+)(.html)};
+
+<li>
+<a target="<%= $name %>" href="/Cookbook/<%= $file %>"><%= $name %></a>
+<a target="angular.js-wiki" href="http://angularjs.org/Cookbook:<%= $name %>">wiki</a>
+
+% }
+
+</ul>
+
+</div>
+
+</body>
+</html>

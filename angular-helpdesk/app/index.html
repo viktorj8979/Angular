@@ -1,0 +1,68 @@
+<!doctype html>
+<html xmlns:ng="http://angularjs.org/" ng:controller="MainCtrl">
+<head>
+  <meta charset="utf-8" />
+  <title ng:bind-template="DOMAIN_NAME :: HelpDesk :: {{title}}">DOMAIN_NAME :: Helpdesk</title>
+  <link rel="stylesheet" href="css/app.css" />
+  <link rel="shortcut icon" href="favicon.ico" />
+</head>
+<body>
+
+  <!-- Transparent toolbar with fixed position - application status -->
+  <div id="fixed-toolbar" ng:show="$status.message"><div class="app-status" ng:bind="$status.message">L o a d i n g . . .</div></div>
+
+  <!-- Google Toolbar -->
+  <div id="g-toolbar">
+    <span class="right" ng:show="$auth.User" style="display: none;">{{$auth.User | userInfo}} | <a ng:href="{{$auth.signout}}">sign out</a></span>
+    <span>Google Toolbar</span>
+  </div>
+
+  <!-- Gray Header with page title -->
+  <div id="header">
+    <div class="w-960">
+      <h1><a href="DOMAIN_URL" target="_blank">DOMAIN_NAME</a> :: HelpDesk<span ng:bind-template=" :: {{title}}"></span></h1>
+    </div>
+  </div>
+
+  <div id="main" class="w-960">
+    <!-- Main Menu -->
+    <div id="menu">
+      <ul>
+        <li><a href="#!/intro" ng:class="activeCls('intro')">Intro</a></li>
+        <li><a href="#!/tickets/active" ng:class="activeCls('tickets/active')">Tickets: Active</a>
+        <li><a href="#!/tickets/all" ng:class="activeCls('tickets/all')">Tickets: All</a></li>
+        <li><a href="#!/projects" ng:class="activeCls('projects')">Projects</a></li>
+      </ul>
+
+    <!-- Content -->
+    </div><div id="content">
+    <ng:view></ng:view>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div id="footer" class="w-960">Powered by <a href="http://angularjs.org" target="_blank">AngularJS</a>.</div>
+
+  <script src="lib/angular/angular.js" ng:autobind></script>
+  <script src="js/utils.js"></script>
+  <script src="js/services.js"></script>
+  <script src="js/controllers.js"></script>
+  <script src="js/filters.js"></script>
+  <script src="js/widgets.js"></script>
+  <script src="js/hackXhr.js"></script>
+  <script src="js/hackBrowser.js"></script>
+
+  <!-- Google Analytics -->
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-21089070-2']);
+    _gaq.push(['_trackPageview']);
+    
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+</body>
+</html>

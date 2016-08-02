@@ -1,0 +1,22 @@
+{
+  "name": "angular-panels",
+  "version": "1.0.0",
+  "description": "Angular widget for easy creation of portal-like floating panels",
+  "main": [
+	"app/js/controllers.js",
+	"app/js/widgets.js"
+  ],
+  "keywords": [
+    "angular",
+    "widget",
+    "panel"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

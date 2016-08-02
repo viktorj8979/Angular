@@ -1,0 +1,18 @@
+@import "bourbon";
+@import "neat";
+
+@import "component";
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+cs-template {
+  display: block;
+  position: relative;
+
+  height: 100%;
+}

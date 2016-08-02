@@ -1,0 +1,179 @@
+<script>
+
+if (typeof (console) === 'undefined') console = { debug: function() {} }; // mock console.debug
+
+function Work($resource){
+	this.master = {
+		type: '',
+		title: '',
+		abstract: '',
+		authors:[ { name:'', surname:'', inst:'', email:'' } ],
+		symposium: { organizer: [ {name:'', surname:'', inst:'', email:'' } ], work_nr: 1, },
+	};
+	this.last_saved_work = {};
+	this.Work = $resource( '/data/conference/Work/:id', { id:'' } );
+	this.Symposium = $resource( '/data/conference/Symposium/:id', { id:'' } );
+	this.reset();
+	this.$watch('$location.hashPath', this.hash_change);
+}
+Work.$inject=['$resource'];
+
+Work.prototype = {
+	hash_change: function() {
+		var id = this.$location.hashPath;
+console.debug( 'hash_change', id, this.work.$id );
+		if ( id != this.work.$id ) {
+			if (id) {
+				var self = this;
+				this.work = this.Work.get({ id: id }, function(work) {
+					self.last_saved_work = angular.copy(work);
+					if ( work.type == 'symposium' ) {
+						var s_id = work.symposium.$id || work.$id;
+						// first work doesn't have symposium.$id, but we used same $id
+console.debug( 'load symposium ', s_id );
+						self.symposium = self.Symposium.get({ id: s_id });
+					}
+				});
+			}
+			else this.reset();
+		}
+	},
+	reset: function() {
+		console.debug( this.Work );
+		var current_symposium = null;
+		if ( this.work && this.work.type == 'symposium' ) {
+			current_symposium = this.work.symposium;
+			if ( this.work.$id ) current_symposium.work_nr++; // only if saved
+console.debug( 'current_symposium', current_symposium, this.work )
+		}
+		this.work = new this.Work( this.master );
+		if ( current_symposium ) {
+			this.work.symposium = current_symposium;
+			this.work.type = 'symposium';
+		}
+		this.last_saved_work = {};
+console.debug( 'reset', current_symposium, this.work, this.$location.hashPath );
+	},
+	save: function(){
+		var self = this;
+		this.work.$save(function(work){
+			self.$location.hashPath = work.$id;
+
+			// save symposium to separate resource
+			if ( work.type == 'symposium' ) {
+				if ( ! self.symposium ) { 
+					self.work.symposium.$id = work.$id; // reuse $id of first work for symposium
+					self.symposium = new self.Symposium( work.symposium );
+					self.symposium.works = [];
+				}
+				self.symposium.works[ work.symposium.work_nr - 1 ] = work;
+		console.debug('save_symposium', self.symposium );
+				self.symposium.$save();
+			}
+
+			self.last_saved_work = angular.copy(work);
+		});
+	},
+	get_symposium: function() { this.symposium },
+};
+
+
+</script>
+
+<h1>Conference work submission</h1>
+
+<div ng:controller="Work" ng:init="$window.$root = this;">
+
+<h2>Type of work:</h2>
+<label><input type="radio" name="work.type" value="symposium"> Symposium</label>
+
+<div ng:show="work.type == 'symposium'" style="background:#f0f0f0">
+
+<label>Topic of symposium: <input name="work.symposium.title" size="60" ng:required></label><br/>
+   
+<label>Summary: <br/>
+<textarea name="work.symposium.abstract" cols="50" rows="5"></textarea>
+</label>
+<br/>
+
+Organizer:
+<div ng:repeat="author in work.symposium.organizer">
+[<a href="" ng:click="work.symposium.organizer.$remove(author)">X</a>]
+<input name="author.name" ng:required>
+<input name="author.surname" ng:required>
+<input name="author.inst" >
+<input name="author.email" ng:required ng:validate="email">
+</div>
+[<a href="" ng:click="work.symposium.organizer.$add()">Add another organizer</a>]
+
+</div>
+
+<br/>
+
+<label><input type="radio" name="work.type" value="lecture"> Lecture</label><br/>
+<label><input type="radio" name="work.type" value="poster"> Poster</label><br/>
+<label><input type="radio" name="work.type" value="round"> Round table</label><br/>
+
+<hr>
+
+<div ng:show="symposium">
+Works which are part of this symposium:
+<ol>
+<li ng:repeat="w in symposium.works">
+<a ng:show="work.$id != w.$id" href="#{{w.$id}}" >{{w.title}}</a>
+<b ng:show="work.$id == w.$id">{{w.title}}</b>
+</li>
+</ol>
+
+</div>
+
+<h2>Autors<span ng:show="work.type == 'symposium'"> of {{work.symposium.work_nr}}. work </span></h2>
+
+<div ng:repeat="author in work.authors">
+[<a href="" ng:click="work.authors.$remove(author)">X</a>]
+<input name="author.name" ng:required>
+<input name="author.surname" ng:required>
+<input name="author.inst" >
+<input name="author.email" ng:required ng:validate="email">
+</div>
+[<a href="" ng:click="work.authors.$add()">Add another author</a>]
+
+<hr>    
+
+
+<label>Title: <input name="work.title" size="60" ng:required></label><br/>
+
+<label>Summary:<br>
+<textarea name="work.abstract" cols="50" rows="5"></textarea>
+</label>
+<br/>
+
+<span ng:show="$invalidWidgets.visible() == 0">
+<input type="submit" value="Save" ng:click="save();" ng:show="! last_saved_work.$equals(work)">
+<input type="reset" value="Add another work" ng:click="reset()" ng:show="work && work.$id">
+</span>
+
+<b ng:show="$invalidWidgets.visible() &gt; 0" style="color:#800">{{$invalidWidgets.visible()}} errors to fix in submission form</b>
+
+<div ng:show="work.$id">
+Permalink to <a href="#{{work.$id}}">{{work.title}}</a> which you can bookmark
+</div>
+
+<hr>
+Debug Information:
+{{$window.location.href}}
+<pre>
+work = {{work}}
+
+dirty={{! last_saved_work.$equals(work)}}
+
+last_saved_work = {{last_saved_work}}
+
+master = {{master}}
+
+$id={{$id}}
+work.$id={{work.$id}}
+work.$id={{work.$id}}
+</pre>
+
+</div>
